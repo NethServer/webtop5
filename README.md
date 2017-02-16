@@ -136,7 +136,7 @@ mkdir -p /var/lib/nethserver/webtop/domains/NethServer/models
 chown -R tomcat:tomcat /var/lib/nethserver/webtop
 ```
 
-Explode the WAR inside Tomcat webapps directory.
+Explode the WAR inside Tomcat webapps directory: `/var/lib/tomcat/webapps`.
 
 #### Tomcat configuration
 
