@@ -7,7 +7,8 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
-Source1: http://www.sonicle.com/nethesis/webtop5/nethesis-webtop5-%{webtop_version}.zip 
+Source1: http://www.sonicle.com/nethesis/webtop5/nethesis-webtop5-%{webtop_version}.zip
+Source2: http://www.sonicle.com/nethesis/webtop5/postgresql-jdbc.jar
 BuildArch: noarch
 Conflicts: webtop4-libs
 
@@ -21,6 +22,8 @@ NethServer WebTop 5 libraries
 
 %build
 mkdir -p root/var/lib/tomcat/webapps/webtop
+mkdir -p root/usr/share/tomcat/lib
+mv %{SOURCE2} root/usr/share/tomcat/lib
 unzip %{SOURCE1}
 unzip webtop5.war \
  *jar \
@@ -39,5 +42,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /var/lib/tomcat/webapps/webtop/*
+/usr/share/tomcat/lib/postgresql-jdbc.jar
 
 %changelog
