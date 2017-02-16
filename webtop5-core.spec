@@ -22,7 +22,9 @@ NethServer WebTop 5 core libraries
 
 %build
 mkdir -p root/var/lib/tomcat/webapps/webtop
+mkdir -p root/usr/share/webtop/
 unzip %{SOURCE1}
+mv sql root/usr/share/webtop/
 unzip webtop5.war \
  WEB-INF/*sonicle*.jar \
  WEB-INF/*webtop*.jar \
@@ -46,6 +48,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /var/lib/tomcat/webapps/webtop/*
+/usr/share/webtop/sql/*
 %doc /usr/share/webtop/doc/VERSION
 %doc COPYING
 
