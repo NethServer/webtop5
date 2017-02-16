@@ -39,6 +39,9 @@ Issue tracker:
 
 ### Roadmap
 
+This is a temporary roadmap and it will likely change in the near feature.
+It will be updated as soon as we gather feeback from the community.
+
 February 2017
 
 - Release of a stable release with all basic functions
