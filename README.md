@@ -22,13 +22,13 @@ WebTop5 is a modern web groupware solution written in Java.
 ### Support
 
 Discussions around WebTop:
-http://community.nethserver.org/c/webtop
+[http://community.nethserver.org/c/webtop](http://community.nethserver.org/c/webtop)
 
 Official site:
-https://redmine.sonicle.com/projects/webtop5
+[https://redmine.sonicle.com/projects/webtop5](https://redmine.sonicle.com/projects/webtop5)
 
 Issue tracker:
-https://redmine.sonicle.com/projects/webtop5/issues
+[https://redmine.sonicle.com/projects/webtop5/issues](https://redmine.sonicle.com/projects/webtop5/issues)
 
 #### How to report a bug
 
@@ -92,7 +92,7 @@ yum --enablerepo=nethserver-testing install nethserver-webtop5
 
 #### Download
 
-- Download the latest release from: http://www.sonicle.com/nethesis/webtop5/
+- Download the latest release from: [http://www.sonicle.com/nethesis/webtop5/](http://www.sonicle.com/nethesis/webtop5/)
 - Extract the zip
 
 #### Database
