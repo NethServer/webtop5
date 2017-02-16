@@ -7,7 +7,7 @@ URL: %{url_prefix}/%{name}
 Source0: http://www.sonicle.com/nethesis/webtop5/z-push-wt5.tgz 
 BuildArch: noarch
 
-Requires: webtop4-core
+Requires: webtop5-core
 Conflicts: webtop4-zpush
 
 BuildRequires: unzip
