@@ -1,6 +1,6 @@
 ## WebTop 5 (beta)
 
-WebTop5 is a modern web groupware solution written in Java.
+WebTop5 is a modern web groupware solution written in Java and HTML5.
 
 - [Features](#features)
 - [Support](#support)
