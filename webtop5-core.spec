@@ -30,6 +30,7 @@ unzip webtop5.war \
  WEB-INF/*webtop*.jar \
  META-INF/MANIFEST.MF \
  META-INF/context.xml \
+ META-INF/data-sources.xml \
  WEB-INF/classes/logback.xml \
  WEB-INF/shiro.ini \
  WEB-INF/web.xml \
