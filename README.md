@@ -9,6 +9,7 @@ WebTop5 is a modern web groupware solution written in Java and HTML5.
 - [RPM install](#rpm-install)
 - [ActiveSync](#activesync)
 - [Manual install](#manual-install)
+- [RPM internals](#rpm-internals)
 
 ### Features
 
@@ -201,3 +202,13 @@ Recommended Tomcat options inside `/etc/sysconfig/tomcat.conf`:
 ```
 JAVA_OPTS="-server -Xms1024m -Xmx2048m -XX:PermSize=64m -XX:MaxPermSize=256m -Djava.security.egd=file:/dev/./urandom -Dfile.encoding=UTF8 -Dcom.sonicle.webtop.extjsdebug=true -Dcom.sonicle.webtop.scheduler.disable=false -Dcom.sonicle.webtop.devmode=true -Dcom.sonicle.webtop.soextdevmode=false"
 ```
+
+### RPM internals
+
+WebTop 5 has been split in 4 different RPMs:
+
+- webtop5-core: Tomcat webapp, derived from a WAR. It contains all jars developed by Sonicle. This package will be updated at each
+  WebTop release 
+- webtop5-libs: derived from a WAR, it contains all third-party jars. This package will be seldom updated
+- webtop5-zpush: ActiveSync implementation for WebTop, it contains PHP code from z-push project (http://z-push.org/) 
+- nethserver-webtop5: NethServer auto-configuration for WebTop
