@@ -19,8 +19,7 @@ NethServer z-push for WebTop 5
 #%setup
 
 %build
-mkdir -p root/var/log/z-push
-mkdir -p root/var/lib/nethserver/z-push/state
+mkdir -p root/var/log/z-push/state
 mkdir -p root/usr/share/webtop/z-push/
 tar xvzf %{SOURCE0} -C root/usr/share/webtop/z-push
 
@@ -32,7 +31,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %attr(755, apache, apache) /var/log/z-push
-%attr(755, apache, apache) /var/lib/nethserver/z-push
+%attr(755, apache, apache) /var/log/z-push/state
 %attr(755, root, root) /usr/share/webtop/z-push/z-push-admin.php
 /usr/share/webtop/z-push/*
 
