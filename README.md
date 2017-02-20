@@ -58,7 +58,7 @@ Q1/2017
 
 Q2/2017
 
-- Documentation about build process to obtain a working war out of the source code
+- Documentation about build process to obtain a working WAR file out of the source code
 - Contribution guidelines on how to open a pull request
 - CardDav/CalDav support
 - Mail archive
