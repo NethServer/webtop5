@@ -7,6 +7,7 @@ WebTop5 is a modern web groupware solution written in Java and HTML5.
 - [Download](#download)
 - [Roadmap](#roadmap)
 - [RPM install](#rpm-install)
+- [ActiveSync](#activesync)
 - [Manual install](#manual-install)
 
 ### Features
@@ -79,11 +80,64 @@ Q4/2017
 
 ### RPM install
 
+This is a **beta** release.
+
+Limitations:
+
+- only local LDAP account provider
+- ActiveSync not tested
+
+
 Access the command line, and execute:
 
 ```
-yum --enablerepo=nethserver-testing install nethserver-webtop5
+yum --enablerepo=nethserver-testing install nethserver-directory nethserver-webtop5
 ```
+#### Login
+
+Always use the full user name format user@domain.
+
+Example:
+
+- Domain: local.nethserver.org
+- User: goofy
+- Login: goofy@local.nethserver.org
+
+Default *admin* password is *admin*.
+
+### ActiveSync
+
+Active must be enabled for each users:
+
+- Login at least once into the web interface
+- Access the web interface using *admin*
+- From the left menu, choose Domains -> NethServer -> Users
+- Double click on the user
+- Add a new authrization by clicking Authorizations -> Add
+- Select the following:
+
+  - Service: com.sonicle.webtop.core (WebTop)
+  - Resource DEVICES_SYNC
+  - Action: ACCESS
+- Click on "Save and close"
+
+You can test ActiveSync using this command (please set user, password and server_name):
+```
+curl -k -u goofy@local.neth.eu:password https://server_name/Microsoft-Server-ActiveSync 
+```
+
+You should see an HTML output containing the string:
+```
+GET not supported
+```
+
+#### Debug
+
+To enable the debug for ActiveSync, set `LOGLEVEL` to  `LOGLEVEL_DEBUG`
+inside `/usr/share/webtop/z-push/config.php`.
+
+All logs are stored inside `/var/log/z-push`.
+
 
 ### Manual install
 
