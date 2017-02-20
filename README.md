@@ -85,14 +85,14 @@ This is a **beta** release.
 
 Limitations:
 
-- only local LDAP account provider
+- only local account provider (OpenLDAP or Samba 4)
 - ActiveSync not tested
 
 
 Access the command line, and execute:
 
 ```
-yum --enablerepo=nethserver-testing install nethserver-directory nethserver-webtop5
+yum --enablerepo=nethserver-testing install nethserver-webtop5
 ```
 #### Login
 
