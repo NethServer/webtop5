@@ -8,7 +8,7 @@ License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
 Source1: http://www.sonicle.com/nethesis/webtop5/nethesis-webtop5-%{webtop_version}.zip
-Source2: http://www.sonicle.com/nethesis/webtop5/postgresql-jdbc.jar
+Source2: http://www.sonicle.com/nethesis/webtop5/postgresql-8.0-312.jdbc3.jar
 BuildArch: noarch
 Conflicts: webtop4-libs
 
@@ -42,6 +42,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /var/lib/tomcats/webtop/webapps/webtop/*
-/usr/share/java/tomcat/postgresql-jdbc.jar
+/usr/share/java/tomcat/postgresql-8.0-312.jdbc3.jar
 
 %changelog
