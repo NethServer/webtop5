@@ -144,7 +144,7 @@ All logs are stored inside `/var/log/z-push`.
 
 #### Requirements
 
-- Java 1.7 or higher
+- Java 1.7
 - Tomcat 7 or higher
 - PostgreSQL
 
