@@ -21,7 +21,7 @@ NethServer WebTop 5 libraries
 %setup
 
 %build
-mkdir -p root/var/lib/tomcat/webapps/webtop
+mkdir -p root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/java/tomcat
 mv %{SOURCE2} root/usr/share/java/tomcat
 unzip %{SOURCE1}
@@ -29,7 +29,7 @@ unzip webtop5.war \
  *jar \
  -x *sonicle*.jar \
  -x *webtop*.jar \
- -d root/var/lib/tomcat/webapps/webtop
+ -d root/var/lib/tomcats/webtop/webapps/webtop
 
 %install
 rm -rf %{buildroot}
@@ -41,7 +41,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/var/lib/tomcat/webapps/webtop/*
+/var/lib/tomcats/webtop/webapps/webtop/*
 /usr/share/java/tomcat/postgresql-jdbc.jar
 
 %changelog

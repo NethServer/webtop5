@@ -21,7 +21,7 @@ NethServer WebTop 5 core libraries
 %setup
 
 %build
-mkdir -p root/var/lib/tomcat/webapps/webtop
+mkdir -p root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/
 unzip %{SOURCE1}
 mv sql root/usr/share/webtop/
@@ -34,7 +34,7 @@ unzip webtop5.war \
  WEB-INF/classes/logback.xml \
  WEB-INF/shiro.ini \
  WEB-INF/web.xml \
- -d root/var/lib/tomcat/webapps/webtop
+ -d root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/doc/
 echo %{webtop_version} > root/usr/share/webtop/doc/VERSION
 
@@ -48,7 +48,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/var/lib/tomcat/webapps/webtop/*
+/var/lib/tomcats/webtop/webapps/webtop/*
 /usr/share/webtop/sql/*
 %doc /usr/share/webtop/doc/VERSION
 %doc COPYING
