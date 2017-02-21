@@ -177,7 +177,45 @@ init-data-mail.sql:
 
 nethserver-domain-init.sql
 
-- set domain configuration with LDAP user and password
+- set domain configuration with LDAP user and password (see below)
+
+##### Authentication configuration
+
+The authentication is configured inside the ``core.domains`` table.
+Eeach record is a domain with the following fields:
+
+- ``domain_id``: unique id for WebTop domain
+- ``internet_name``:  eg. "sonicle.com", is the Internet domain mapped into WebTop domain
+- ``enabled``: enabled / disable the domain
+- ``description``: description displayed inside the admin section of the web interface
+- ``user_auto_creation``: if enabled, each user configured inside the LDAP will be able to login;
+  if disabled, the admin must manually enable all users before login
+- ``dir_uri``:  (eg "ldapwebtop://www.sonicle.com:389"), identify the directory (LDAP) used for
+  authentication and user list. Supported prefixes:
+  - webtop: local authentication on db
+  - ldap: remote or local LDAP
+  - ldapwebtop: LDAP preset fpr xstreamserver
+  - ldapneth: LDAP preset for NethServer
+  - ad: LDAP preset for Active Directory
+- ``dir_admin``: administrative user used for operartions on users. If the autentication
+  backend is a LDAP server, it represents the admin DN
+- ``dir_password``: set the password for ``dir_admin``
+- ``dir_connection_security``: set the security policy for LDAP connection. Supported values: ``<null>``, ``SSL``, ``STARTTLS``
+- ``dir_case_sensitive``: if enabled, usernames for login will evaluated in case-sensitive manner
+- ``dir_password_policy``: if enabled, WebTop will check for password strenght
+- ``dir_parameters``: string in JSON format to configure LDAP parameters. Supported parameters:
+   - ``loginDn``: base DN for login (required)
+   - ``loginFilter``: filter to allow the login only for selected users (optional)
+   - ``userDn``: user tree (required)
+   - ``userFilter``: filter to restrict the list of users (optional)
+   - ``userFirstnameField``: field to retrieve the first name (optional)
+   - ``userLastnameField``: field to retrieve the last name (optional)
+   - ``userDisplayNameField``: field to retrieve the full name
+
+   Example:
+   ```
+   {"loginDn":"ou=People,dc=directory,dc=nh","loginFilter":null,"userDn":"ou=People,dc=directory,dc=nh","userFilter":null,"userFirstnameField":null,"userLastnameField":null,"userDisplayNameField":null}
+   ```
 
 #### WAR deployment
 
