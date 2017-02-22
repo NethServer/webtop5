@@ -132,6 +132,14 @@ You should see an HTML output containing the string:
 GET not supported
 ```
 
+Each user must select which categories of contacts/calendar/tasks should be kept in sync.
+Example:
+
+- Open the "Contacts" section
+- Right clik con "WebTop" category and select "Edit category"
+- Select "Complete" inside the "Synchronization" field
+
+
 #### Debug
 
 To enable the debug for ActiveSync, set `LOGLEVEL` to  `LOGLEVEL_DEBUG`
@@ -206,6 +214,7 @@ Eeach record is a domain with the following fields:
 - ``dir_parameters``: string in JSON format to configure LDAP parameters. Supported parameters:
    - ``loginDn``: base DN for login (required)
    - ``loginFilter``: filter to allow the login only for selected users (optional)
+   - ``userIdField``: fielter to retrieve the user name (optional)
    - ``userDn``: user tree (required)
    - ``userFilter``: filter to restrict the list of users (optional)
    - ``userFirstnameField``: field to retrieve the first name (optional)
