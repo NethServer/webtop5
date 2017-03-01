@@ -1,4 +1,4 @@
-%define webtop_version beta3
+%define webtop_version rc1
 
 Summary: WebTop5 libs
 Name: webtop5-libs
