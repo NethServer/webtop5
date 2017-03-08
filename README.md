@@ -87,11 +87,7 @@ Official manual: [http://docs.nethserver.org/en/latest/webtop5.html](http://docs
 
 #### RPM install
 
-Access the command line, and execute:
-
-```
-yum --enablerepo=nethserver-testing install nethserver-webtop5
-```
+Access the Software Center and install the "WebTop 5" module.
 
 ### Manual install
 
