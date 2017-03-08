@@ -7,9 +7,9 @@ WebTop5 is a modern web groupware solution written in Java and HTML5.
 - [Download](#download)
 - [Roadmap](#roadmap)
 - [RPM install](#rpm-install)
-- [ActiveSync](#activesync)
-- [Manual install](#manual-install)
-- [Internals and debug](http://docs.nethserver.org/projects/nethserver-devel/en/v7/nethserver-webtop5.html)
+- [WebTop5 on NethServer](#webtop-5-on-nethserver)
+- [Internals and debug](http://docs.nethserver.org/projects/nethserver-devel/en/latest/nethserver-webtop5.html)
+- [Manual installation](#manual-install)
 
 ### Features
 
@@ -79,41 +79,18 @@ Q4/2017
 - Improved layout for tablets
 
 
-### RPM install
+### WebTop 5 on NethServer
 
-This is a **rc** release.
+This is a **release candidate**.
+
+Official manual: [http://docs.nethserver.org/en/latest/webtop5.html](http://docs.nethserver.org/en/latest/webtop5.html)
+
+#### RPM install
 
 Access the command line, and execute:
 
 ```
 yum --enablerepo=nethserver-testing install nethserver-webtop5
-```
-#### Login
-
-Always use the full user name format user@domain.
-
-Example:
-
-- Domain: local.nethserver.org
-- User: goofy
-- Login: goofy@local.nethserver.org
-
-Default *admin* password is *admin*.
-
-### ActiveSync
-
-ActiveSync is automatically enabled for all users, the default "WebTop" category
-for contacts, tasks and calendar is configured in read/write mode for all synched devices.
-
-
-You can test ActiveSync using this command (please set user, password and server_name):
-```
-curl -k -u goofy@local.neth.eu:password https://server_name/Microsoft-Server-ActiveSync 
-```
-
-You should see an HTML output containing the string:
-```
-GET not supported
 ```
 
 ### Manual install
