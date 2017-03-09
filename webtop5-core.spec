@@ -1,4 +1,4 @@
-%define webtop_version rc4
+%define webtop_version rc5
 
 Summary: WebTop5 core
 Name: webtop5-core
