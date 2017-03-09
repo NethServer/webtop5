@@ -2,7 +2,7 @@
 
 Summary: WebTop5 core
 Name: webtop5-core
-Version: 1.0.0
+Version: 1.0.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -54,6 +54,9 @@ rm -rf %{buildroot}
 %doc COPYING
 
 %changelog
+* Thu Mar 09 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.1-1
+- WebTop 5: contacts don't work at all - Bug NethServer/dev#5237
+
 * Wed Mar 08 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.0-1
 - First WebTop5 release - NethServer/dev#5225
 
