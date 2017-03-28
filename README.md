@@ -4,6 +4,7 @@ WebTop5 is a modern web groupware solution written in Java and HTML5.
 
 - [Features](#features)
 - [Support](#support)
+- [Internationalization](#internationalization)
 - [Download](#download)
 - [Roadmap](#roadmap)
 - [RPM install](#rpm-install)
@@ -38,6 +39,30 @@ Issue tracker:
 - After the discussion, a developer will take care to open the issue inside the official issue tracker
 - The issue number will be posted back to the discussion, so everyone will be able to follow the development
 
+### Internationalization
+
+These are the coding conventions for NethServer i18n.
+Each webtop repository should respect them.
+
+- The developer prepares the translation source strings when writing
+  the code.
+
+- Each translation catalog must be mapped to a resource on [Transifex](https://www.transifex.com/nethserver/webtop5/dashboard/).
+
+- Whenever new strings are added or existing ones are changed, source
+  catalogs must be pushed into Transifex with [Transifex client](http://docs.transifex.com/developer/client/):
+```
+ tx push -s
+```
+
+To configure the Transifex client execute the [webtop5-txinit.sh](https://gist.github.com/gsanchietti/b1cd46bfcfe4fb586ac7b5d091f9385e) script on the
+repository root.  The script can be executed multiple times, if new
+catalogs are added to the repository.
+
+#### Language sources
+
+All source language catalog files are placed inside ``.properties`` files.
+The file format is [Java properties](https://docs.transifex.com/formats/java-properties).
 
 ### Roadmap
 
