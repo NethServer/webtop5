@@ -126,8 +126,24 @@ You should not need to follow this procedure if you're using WebTop5 on NethServ
 
 #### Download
 
-- Download the latest release from: [http://www.sonicle.com/nethesis/webtop5/](http://www.sonicle.com/nethesis/webtop5/)
-- Extract the zip
+You can build WebTop 5 directly from sources, just make sure to have
+installed following software inside your machine:
+
+- Maven: [https://maven.apache.org/](https://maven.apache.org/)
+- JDK Java compiler [http://openjdk.java.net/](http://openjdk.java.net/)
+
+On Fedora 25:
+```
+dnf install maven java-1.8.0-openjdk-devel
+```
+
+On CentOS 7:
+```
+yum install maven java-1.8.0-openjdk-devel
+```
+
+Please, see istruction here: https://github.com/sonicle/sonicle-webtop5-gate
+Or if you prefer, you can use ``webtop5-build.sh`` script.
 
 #### Database
 

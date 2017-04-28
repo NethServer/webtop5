@@ -1,5 +1,3 @@
-%define webtop_version rc6
-
 Summary: WebTop5 core
 Name: webtop5-core
 Version: 1.0.2
@@ -7,7 +5,10 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
-Source1: http://www.sonicle.com/nethesis/webtop5/nethesis-webtop5-%{webtop_version}.zip 
+# Source1 and Source2 can be downloaded executing: webtop5-build.sh
+Source1: webtop-webapp-5.war
+Source2: sql-scripts.tar.gz
+Source3: nethserver-domain-init.sql
 BuildArch: noarch
 Requires: webtop5-libs
 Conflicts: webtop4-core
@@ -22,10 +23,10 @@ NethServer WebTop 5 core libraries
 
 %build
 mkdir -p root/var/lib/tomcats/webtop/webapps/webtop
-mkdir -p root/usr/share/webtop/
-unzip %{SOURCE1}
-mv sql root/usr/share/webtop/
-unzip webtop5.war \
+mkdir -p root/usr/share/webtop/sql
+tar xvzf %{SOURCE2} -C root/usr/share/webtop/sql
+cp %{SOURCE3} root/usr/share/webtop/sql
+unzip %{SOURCE1} \
  WEB-INF/*sonicle*.jar \
  WEB-INF/*webtop*.jar \
  META-INF/MANIFEST.MF \
@@ -36,7 +37,6 @@ unzip webtop5.war \
  WEB-INF/web.xml \
  -d root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/doc/
-echo %{webtop_version} > root/usr/share/webtop/doc/VERSION
 
 %install
 rm -rf %{buildroot}
@@ -50,7 +50,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /var/lib/tomcats/webtop/webapps/webtop/*
 /usr/share/webtop/sql/*
-%doc /usr/share/webtop/doc/VERSION
 %doc COPYING
 
 %changelog
