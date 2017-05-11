@@ -9,6 +9,7 @@ Source0: %{name}-%{version}.tar.gz
 Source1: webtop-webapp-5.war
 Source2: sql-scripts.tar.gz
 Source3: nethserver-domain-init.sql
+Source4: VERSION
 BuildArch: noarch
 Requires: webtop5-libs
 Conflicts: webtop4-core
@@ -37,6 +38,7 @@ unzip %{SOURCE1} \
  WEB-INF/web.xml \
  -d root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/doc/
+cp %{SOURCE4} root/usr/share/webtop/doc/
 
 %install
 rm -rf %{buildroot}
@@ -51,6 +53,7 @@ rm -rf %{buildroot}
 /var/lib/tomcats/webtop/webapps/webtop/*
 /usr/share/webtop/sql/*
 %doc COPYING
+%doc /usr/share/webtop/doc/VERSION
 
 %changelog
 * Mon Mar 27 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.2-1

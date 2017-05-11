@@ -55,7 +55,7 @@ echo
 gmake build
 
 echo
-echo "Createing war..."
+echo "Creating war..."
 echo
 gmake deploy
 
@@ -69,6 +69,11 @@ tar cvzf sql-scripts.tar.gz -C $tmpdir .
 echo "sql-scripts.tar.gz successfully created"
 echo
 
+echo
+echo "Generating VERSION file..."
+git -C components/webtop-core describe > VERSION
+echo
+
 popd
 
 echo
@@ -76,6 +81,7 @@ echo "Copying files..."
 echo
 cp -v sonicle-webtop5-gate/components/webtop-webapp/target/webtop-webapp-5.war .
 cp -v sonicle-webtop5-gate/sql-scripts.tar.gz .
+cp -v sonicle-webtop5-gate/VERSION .
 echo
 echo "webtop-webapp-5.war and sql-scripts.tar.gz successfully created"
 echo
