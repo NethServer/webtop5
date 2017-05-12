@@ -10,7 +10,7 @@ BuildArch: noarch
 Requires: webtop5-core
 Conflicts: webtop4-zpush
 
-BuildRequires: unzip
+BuildRequires: php-cli
 
 %description
 NethServer z-push for WebTop 5
@@ -23,6 +23,7 @@ mkdir -p root/var/log/z-push/state
 mkdir -p root/usr/share/webtop/z-push/
 tar xvzf %{SOURCE0} --exclude='.gitignore' -C root/usr/share/webtop/z-push --strip-components=2 z-push-webtop-master-sonicle/src
 rm -rf  root/usr/share/webtop/z-push/backend/{caldav,carddav,kopano,ldap,maildir,searchldap,sqlstatemachine,vcarddir}
+php -r "include('root/usr/share/webtop/z-push/backend/webtop/config.php'); file_put_contents('root/usr/share/webtop/z-push/VERSION',ZPUSH_VERSION);"
 
 %install
 rm -rf %{buildroot}
