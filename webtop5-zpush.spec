@@ -22,6 +22,7 @@ NethServer z-push for WebTop 5
 mkdir -p root/var/log/z-push/state
 mkdir -p root/usr/share/webtop/z-push/
 tar xvzf %{SOURCE0} --exclude='.gitignore' -C root/usr/share/webtop/z-push --strip-components=2 z-push-webtop-master-sonicle/src
+rm -rf  root/usr/share/webtop/z-push/backend/{caldav,carddav,kopano,ldap,maildir,searchldap,sqlstatemachine,vcarddir}
 
 %install
 rm -rf %{buildroot}
