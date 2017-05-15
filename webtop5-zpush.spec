@@ -4,13 +4,13 @@ Version: 1.0.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
-Source0: http://www.sonicle.com/nethesis/webtop5/z-push-wt5.tgz 
+Source0: https://github.com/sonicle-webtop/z-push-webtop/archive/master-sonicle.tar.gz
 BuildArch: noarch
 
 Requires: webtop5-core
 Conflicts: webtop4-zpush
 
-BuildRequires: unzip
+BuildRequires: php-cli
 
 %description
 NethServer z-push for WebTop 5
@@ -21,7 +21,9 @@ NethServer z-push for WebTop 5
 %build
 mkdir -p root/var/log/z-push/state
 mkdir -p root/usr/share/webtop/z-push/
-tar xvzf %{SOURCE0} -C root/usr/share/webtop/z-push
+tar xvzf %{SOURCE0} --exclude='.gitignore' -C root/usr/share/webtop/z-push --strip-components=2 z-push-webtop-master-sonicle/src
+rm -rf  root/usr/share/webtop/z-push/backend/{caldav,carddav,kopano,ldap,maildir,searchldap,sqlstatemachine,vcarddir}
+php -r "include('root/usr/share/webtop/z-push/backend/webtop/config.php'); file_put_contents('root/usr/share/webtop/z-push/VERSION',ZPUSH_VERSION);"
 
 %install
 rm -rf %{buildroot}
