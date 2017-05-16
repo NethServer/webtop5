@@ -47,7 +47,7 @@ Each webtop repository should respect them.
 - The developer prepares the translation source strings when writing
   the code.
 
-- Each translation catalog must be mapped to a resource on [Transifex](https://www.transifex.com/nethserver/webtop5/dashboard/).
+- Each translation catalog must be mapped to a resource on [Transifex](https://www.transifex.com/sonicle/public/).
 
 - Whenever new strings are added or existing ones are changed, source
   catalogs must be pushed into Transifex with [Transifex client](http://docs.transifex.com/developer/client/):
