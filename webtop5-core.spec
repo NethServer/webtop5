@@ -1,6 +1,6 @@
 Summary: WebTop5 core
 Name: webtop5-core
-Version: 1.0.2
+Version: 1.1.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -56,6 +56,10 @@ rm -rf %{buildroot}
 %doc /usr/share/webtop/doc/VERSION
 
 %changelog
+* Wed May 17 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.0-1
+- WebTop 5: enable folder sorting - NethServer/dev#5275
+- Build RPM from source
+
 * Mon Mar 27 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.2-1
 - Upgrade to RC 6 - NethServer/dev#5250
 

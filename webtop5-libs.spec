@@ -1,6 +1,6 @@
 Summary: WebTop5 libs
 Name: webtop5-libs
-Version: 1.0.0
+Version: 1.1.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -43,6 +43,10 @@ rm -rf %{buildroot}
 /usr/share/java/tomcat/postgresql-8.0-312.jdbc3.jar
 
 %changelog
+* Wed May 17 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.0-1
+- WebTop 5: enable folder sorting - NethServer/dev#5275
+- Build RPM from source
+
 * Wed Mar 08 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.0-1
 - First WebTop5 release - NethServer/dev#5225
 
