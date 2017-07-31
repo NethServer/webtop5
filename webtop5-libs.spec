@@ -8,7 +8,6 @@ Source0: %{name}-%{version}.tar.gz
 # Source1 can be downloaded executing: webtop5-build.sh
 Source1: webtop-webapp-5.war
 Source2: http://www.sonicle.com/nethesis/webtop5/postgresql-8.0-312.jdbc3.jar
-Source3: https://github.com/gsanchietti/ManageSieveJ/releases/download/0.2.1/managesievej-0.2.1.jar
 BuildArch: noarch
 Conflicts: webtop4-libs
 
@@ -29,10 +28,6 @@ unzip %{SOURCE1} \
  -x *sonicle*.jar \
  -x *webtop*.jar \
  -d root/var/lib/tomcats/webtop/webapps/webtop
-
-# Replace bundled managesieve library - NethServer/dev#5312
-find root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/lib/ -name managesieve\*.jar -delete
-mv %{SOURCE3} root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/lib/
 
 %install
 rm -rf %{buildroot}
