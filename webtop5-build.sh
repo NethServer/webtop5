@@ -64,7 +64,7 @@ echo "Extracting sql scripts..."
 tmpdir=$(mktemp -d)
 mkdir $tmpdir/{data,schema}
 find -path "*/resources/*" -name init-data\*.sql -type f  -exec cp -p '{}' $tmpdir/data \;
-find -path "*/resources/*" -name \*.sql ! -name init-data\*.sql -type f -exec cp -p '{}' $tmpdir/schema \;
+find -path "*/resources/*" -name init-\*.sql ! -name init-data\*.sql -type f -exec cp -p '{}' $tmpdir/schema \;
 tar cvzf sql-scripts.tar.gz -C $tmpdir .
 echo "sql-scripts.tar.gz successfully created"
 echo
