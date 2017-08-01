@@ -65,6 +65,8 @@ tmpdir=$(mktemp -d)
 mkdir $tmpdir/{data,schema}
 find -path "*/resources/*" -name init-data\*.sql -type f  -exec cp -p '{}' $tmpdir/data \;
 find -path "*/resources/*" -name init-\*.sql ! -name init-data\*.sql -type f -exec cp -p '{}' $tmpdir/schema \;
+# Remove invalid lines starting with @ used inside WebTop
+find $tmpdir/schema -name init-\*.sql | xargs sed -i '/^@/d'
 tar cvzf sql-scripts.tar.gz -C $tmpdir .
 echo "sql-scripts.tar.gz successfully created"
 echo
