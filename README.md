@@ -153,7 +153,6 @@ Or if you prefer, you can use ``webtop5-build.sh`` script.
 - Execute all sql scripts inside `sql/data` in the following order:
 
   - init-data-core.sql
-  - nethserver-domain-init.sql
 
 
 ##### Default settings
@@ -166,10 +165,6 @@ init-data-core.sql:
 init-data-mail.sql:
 
 - check configuration under `settings` section (eg. spam folder name)
-
-nethserver-domain-init.sql
-
-- set domain configuration with LDAP user and password (see below)
 
 ##### Authentication configuration
 

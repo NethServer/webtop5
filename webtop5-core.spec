@@ -8,7 +8,6 @@ Source0: %{name}-%{version}.tar.gz
 # Source1 and Source2 can be downloaded executing: webtop5-build.sh
 Source1: webtop-webapp-5.war
 Source2: sql-scripts.tar.gz
-Source3: nethserver-domain-init.sql
 Source4: VERSION
 BuildArch: noarch
 Requires: webtop5-libs
@@ -26,7 +25,6 @@ NethServer WebTop 5 core libraries
 mkdir -p root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/sql
 tar xvzf %{SOURCE2} -C root/usr/share/webtop/sql
-cp %{SOURCE3} root/usr/share/webtop/sql
 unzip %{SOURCE1} \
  WEB-INF/*sonicle*.jar \
  WEB-INF/*webtop*.jar \
