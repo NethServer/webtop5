@@ -11,6 +11,10 @@ Source2: http://www.sonicle.com/nethesis/webtop5/postgresql-8.0-312.jdbc3.jar
 BuildArch: noarch
 Conflicts: webtop4-libs
 
+# Do not repack JARs to avoid file date
+# Should be safe: https://www.redhat.com/archives/fedora-devel-java-list/2008-September/msg00042.html
+%define __jar_repack %{nil}
+
 BuildRequires: unzip
 
 %description
