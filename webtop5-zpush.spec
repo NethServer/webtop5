@@ -1,6 +1,6 @@
 Summary: WebTop z-push
 Name: webtop5-zpush
-Version: 1.1.0
+Version: 1.1.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -38,6 +38,9 @@ rm -rf %{buildroot}
 /usr/share/webtop/z-push/*
 
 %changelog
+* Mon Sep 04 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.1-1
+- Release WebTop 5.0.13 - NethServer/dev#5338
+
 * Wed May 17 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.0-1
 - WebTop 5: enable folder sorting - NethServer/dev#5275
 - Build RPM from source
