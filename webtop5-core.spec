@@ -46,9 +46,15 @@ cp %{SOURCE4} root/usr/share/webtop/doc/
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 
-%post
-
-%preun
+%pre
+if [ $1 -gt 1 ] ; then
+    # Stop Tomcat to avoid DB corruption, only if autoDeploy is set to true.
+    # Note: nethserver-webtop5 should take care to restart it
+    grep -qs 'autoDeploy="true"' /var/lib/tomcats/webtop/conf/server.xml
+    if [ $? -eq 0 ]; then
+        systemctl stop tomcat@webtop.service > /dev/null 2>&1 || :
+    fi
+fi
 
 %files
 %defattr(-,root,root)
