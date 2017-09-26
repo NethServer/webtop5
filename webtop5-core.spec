@@ -12,6 +12,7 @@ Source4: VERSION
 BuildArch: noarch
 Requires: webtop5-libs
 Conflicts: webtop4-core
+Patch0: password_length.patch
 
 # Do not repack JARs to avoid file date
 # Should be safe: https://www.redhat.com/archives/fedora-devel-java-list/2008-September/msg00042.html
@@ -29,6 +30,7 @@ NethServer WebTop 5 core libraries
 mkdir -p root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/sql
 tar xvzf %{SOURCE2} -C root/usr/share/webtop/sql
+patch -d root/usr/share/webtop/sql -p1 < %{PATCH0}
 unzip %{SOURCE1} \
  WEB-INF/*sonicle*.jar \
  WEB-INF/*webtop*.jar \
