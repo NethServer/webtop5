@@ -73,7 +73,7 @@ echo
 
 echo
 echo "Generating VERSION file..."
-git -C components/webtop-core describe > VERSION
+git --git-dir=components/webtop-core/.git describe > VERSION
 echo
 
 popd

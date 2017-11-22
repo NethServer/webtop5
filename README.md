@@ -93,7 +93,7 @@ dnf install maven java-1.8.0-openjdk-devel
 
 On CentOS 7:
 ```
-yum install maven java-1.8.0-openjdk-devel
+yum install maven java-1.8.0-openjdk-devel bzip2
 ```
 
 Please, see istruction here: https://github.com/sonicle/sonicle-webtop5-gate
@@ -107,4 +107,3 @@ Official manual: [http://docs.nethserver.org/en/latest/webtop5.html](http://docs
 To install, access the Software Center and install the "WebTop 5" module or execute from command line:
 ```
 yum install nethserver-webtop5
-
