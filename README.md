@@ -97,7 +97,17 @@ yum install maven java-1.8.0-openjdk-devel bzip2
 ```
 
 Please, see istruction here: https://github.com/sonicle/sonicle-webtop5-gate
-Or if you prefer, you can use ``webtop5-build.sh`` script.
+
+#### webtop5-build.sh
+
+You can use also use ``webtop5-build.sh`` automation script.
+
+Before starting the script, make sure to select the correct release by adding it to `VERSION` file:
+```
+echo wt-5.1.4 > VERSION
+```
+
+List of available releases: https://github.com/sonicle-webtop/webtop-webapp/releases
 
 ### WebTop 5 on NethServer
 
