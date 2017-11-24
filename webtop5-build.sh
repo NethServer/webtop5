@@ -25,9 +25,28 @@
 
 set -e 
 
+function exit_error
+{
+    echo "ERROR: please create a VERSION file containing the WebTop 5 git tag"
+    echo
+    echo "  Example: echo 'wt-5.1.4' > VERSION"
+    echo
+    exit 1
+}
+
 for P in mvn javac; do
     which $P >/dev/null 2>&1 || { echo "Missing '$P' executable!"; exit 1; }
 done
+
+if [ ! -f VERSION ]; then
+   exit_error
+fi
+
+tag_name=$(cat VERSION)
+
+if [ -z $tag_name ]; then
+    exit_error
+fi
 
 if [ ! -d sonicle-webtop5-gate ]; then
     echo "Downloading sonicle-webtop5-gate..."
@@ -36,18 +55,37 @@ if [ ! -d sonicle-webtop5-gate ]; then
 fi
 
 pushd sonicle-webtop5-gate
+git pull
 
-if [ ! -d sencha ]; then
-     echo
-    echo "Cloning all repositories..."
-    echo
-    gmake clone
+echo
+echo "Cleanup local copy... "
+rm -rf sencha components
+
+echo
+echo "Cloning all repositories..."
+echo
+gmake clone
+
+
+if [ -n $tag_name ]; then
+    pushd components
+
+    for d in $(find . -maxdepth 1  -type d)
+    do
+	repo_path="$d/.git"
+	repo_name=$(basename $d)
+        if [ -d $repo_path ]; then
+	   if [ git --git-dir=$repo_path tag | grep -q $tag_name -eq 0 ]; then
+	       echo "Checking out tag '$tag_name' for '$repo_name'"
+               git --git-dir=$repo_path checkout tags/$tag_name
+	   else
+	       echo "Checking out 'master' for '$repo_name'"
+           fi
+	fi
+    done
+
+    popd
 fi
-
-echo
-echo "Checking for updates..."
-echo
-gmake update
 
 echo
 echo "Building..."
@@ -71,11 +109,6 @@ tar cvzf sql-scripts.tar.gz -C $tmpdir .
 echo "sql-scripts.tar.gz successfully created"
 echo
 
-echo
-echo "Generating VERSION file..."
-git --git-dir=components/webtop-core/.git describe > VERSION
-echo
-
 popd
 
 echo
@@ -83,7 +116,6 @@ echo "Copying files..."
 echo
 cp -v sonicle-webtop5-gate/components/webtop-webapp/target/webtop-webapp-5.war .
 cp -v sonicle-webtop5-gate/sql-scripts.tar.gz .
-cp -v sonicle-webtop5-gate/VERSION .
 echo
 echo "webtop-webapp-5.war and sql-scripts.tar.gz successfully created"
 echo
