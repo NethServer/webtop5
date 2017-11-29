@@ -1,6 +1,6 @@
 Summary: WebTop z-push
 Name: webtop5-zpush
-Version: 1.1.1
+Version: 1.1.2
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -38,6 +38,9 @@ rm -rf %{buildroot}
 /usr/share/webtop/z-push/*
 
 %changelog
+* Wed Nov 29 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.2-1
+- Update to wt-5.1.4 - NethServer/de#5376
+
 * Mon Sep 04 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.1-1
 - Release WebTop 5.0.13 - NethServer/dev#5338
 

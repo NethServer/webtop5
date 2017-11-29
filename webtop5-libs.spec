@@ -1,6 +1,6 @@
 Summary: WebTop5 libs
 Name: webtop5-libs
-Version: 1.1.4
+Version: 1.1.6
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -47,6 +47,9 @@ rm -rf %{buildroot}
 /usr/share/java/tomcat/postgresql-8.0-312.jdbc3.jar
 
 %changelog
+* Wed Nov 29 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.6-1
+- Update to wt-5.1.4 - NethServer/de#5376
+
 * Mon Sep 04 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.4-1
 - Release WebTop 5.0.13 - NethServer/dev#5338
 

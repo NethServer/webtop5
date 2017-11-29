@@ -1,6 +1,6 @@
 Summary: WebTop5 core
 Name: webtop5-core
-Version: 1.1.5
+Version: 1.1.6
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -66,6 +66,9 @@ fi
 %doc /usr/share/webtop/doc/VERSION
 
 %changelog
+* Wed Nov 29 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.6-1
+- Update to wt-5.1.4 - NethServer/de#5376
+
 * Fri Sep 08 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.5-1
 - WebTop 5.0.13 - Bug NethServer/dev#5338
 - Stop Tomcat before WebTop deploy
