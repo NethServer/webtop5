@@ -75,7 +75,7 @@ if [ -n $tag_name ]; then
 	repo_path="$d/.git"
 	repo_name=$(basename $d)
         if [ -d $repo_path ]; then
-	   if [ git --git-dir=$repo_path tag | grep -q $tag_name -eq 0 ]; then
+           if git --git-dir=$repo_path tag | grep -q $tag_name ; then
 	       echo "Checking out tag '$tag_name' for '$repo_name'"
                git --git-dir=$repo_path checkout tags/$tag_name
 	   else
