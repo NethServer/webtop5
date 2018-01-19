@@ -1,5 +1,5 @@
-Summary: WebTop5 core
-Name: webtop5-core
+Summary: WebTop5
+Name: webtop5
 Version: 1.1.6
 Release: 1%{?dist}
 License: GPL
@@ -10,7 +10,8 @@ Source1: webtop-webapp-5.war
 Source2: sql-scripts.tar.gz
 Source4: VERSION
 BuildArch: noarch
-Requires: webtop5-libs
+Provides: webtop5-core, webtop5-libs
+Obsoletes: webtop5-core, webtop5-libs
 Conflicts: webtop4-core
 Patch0: password_length.patch
 
@@ -21,7 +22,8 @@ Patch0: password_length.patch
 BuildRequires: unzip
 
 %description
-NethServer WebTop 5 core libraries
+WebTop 5 RPM, see http://sonicle-webtop.sourceforge.net/
+
 
 %prep
 %setup
@@ -31,16 +33,7 @@ mkdir -p root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/sql
 tar xvzf %{SOURCE2} -C root/usr/share/webtop/sql
 patch -d root/usr/share/webtop/sql -p1 < %{PATCH0}
-unzip %{SOURCE1} \
- WEB-INF/*sonicle*.jar \
- WEB-INF/*webtop*.jar \
- META-INF/MANIFEST.MF \
- META-INF/context.xml \
- META-INF/data-sources.xml \
- WEB-INF/classes/logback.xml \
- WEB-INF/shiro.ini \
- WEB-INF/web.xml \
- -d root/var/lib/tomcats/webtop/webapps/webtop
+unzip %{SOURCE1} -d root/var/lib/tomcats/webtop/webapps/webtop
 mkdir -p root/usr/share/webtop/doc/
 cp %{SOURCE4} root/usr/share/webtop/doc/
 
