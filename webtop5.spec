@@ -34,8 +34,6 @@ mkdir -p root/usr/share/webtop/sql
 tar xvzf %{SOURCE2} -C root/usr/share/webtop/sql
 patch -d root/usr/share/webtop/sql -p1 < %{PATCH0}
 unzip %{SOURCE1} -d root/var/lib/tomcats/webtop/webapps/webtop
-mkdir -p root/usr/share/webtop/doc/
-cp %{SOURCE4} root/usr/share/webtop/doc/
 
 %install
 rm -rf %{buildroot}
@@ -56,7 +54,7 @@ fi
 /var/lib/tomcats/webtop/webapps/webtop/*
 /usr/share/webtop/sql/*
 %doc COPYING
-%doc /usr/share/webtop/doc/VERSION
+%doc VERSION
 
 %changelog
 * Wed Nov 29 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.6-1
