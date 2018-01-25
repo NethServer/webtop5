@@ -77,7 +77,7 @@ if [ -n $tag_name ]; then
         if [ -d $repo_path ]; then
            if git --git-dir=$repo_path tag | grep -q $tag_name ; then
 	       echo "Checking out tag '$tag_name' for '$repo_name'"
-               git --git-dir=$repo_path checkout tags/$tag_name > /dev/null
+               git --git-dir=$repo_path checkout tags/$tag_name --force > /dev/null
 	   else
 	       echo "Checking out 'master' for '$repo_name'"
            fi
