@@ -1,6 +1,6 @@
 Summary: WebTop5
 Name: webtop5
-Version: 1.1.6
+Version: 1.2.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -57,6 +57,9 @@ fi
 %doc VERSION
 
 %changelog
+* Wed Jan 31 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.0-1
+- WebTop 5.1.5 - NethServer/dev#5414
+
 * Wed Nov 29 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.6-1
 - Update to wt-5.1.4 - NethServer/de#5376
 
