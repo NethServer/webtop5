@@ -49,6 +49,12 @@ if [ $1 -gt 1 ] ; then
     fi
 fi
 
+%post
+if [ $1 -ge 1 ] ; then 
+        # Package upgrade, not uninstall 
+        systemctl try-restart tomcat@webtop>/dev/null 2>&1 || : 
+fi
+
 %files
 %defattr(-,root,root)
 /var/lib/tomcats/webtop/webapps/webtop/*
