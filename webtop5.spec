@@ -19,7 +19,9 @@ Patch0: password_length.patch
 # Should be safe: https://www.redhat.com/archives/fedora-devel-java-list/2008-September/msg00042.html
 %define __jar_repack %{nil}
 
-BuildRequires: unzip
+%{?systemd_requires}
+
+BuildRequires: unzip, systemd
 
 %description
 WebTop 5 RPM, see http://sonicle-webtop.sourceforge.net/
@@ -40,6 +42,9 @@ mv root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml root/v
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 
+%postun
+%systemd_postun_with_restart tomcat@webtop.service
+%systemd_postun_with_restart tomcat8@webtop.service
 
 %files
 %defattr(-,root,root)
