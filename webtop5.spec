@@ -19,11 +19,12 @@ Patch0: password_length.patch
 # Should be safe: https://www.redhat.com/archives/fedora-devel-java-list/2008-September/msg00042.html
 %define __jar_repack %{nil}
 
-BuildRequires: unzip
+%{?systemd_requires}
+
+BuildRequires: unzip, systemd
 
 %description
 WebTop 5 RPM, see http://sonicle-webtop.sourceforge.net/
-
 
 %prep
 %setup
@@ -41,15 +42,9 @@ mv root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml root/v
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
 
-%pre
-if [ $1 -gt 1 ] ; then
-    # Stop Tomcat to avoid DB corruption, only if autoDeploy is set to true.
-    # Note: nethserver-webtop5 should take care to restart it
-    grep -qs 'autoDeploy="true"' /var/lib/tomcats/webtop/conf/server.xml
-    if [ $? -eq 0 ]; then
-        systemctl stop tomcat@webtop.service > /dev/null 2>&1 || :
-    fi
-fi
+%postun
+%systemd_postun_with_restart tomcat@webtop.service
+%systemd_postun_with_restart tomcat8@webtop.service
 
 %files
 %defattr(-,root,root)
