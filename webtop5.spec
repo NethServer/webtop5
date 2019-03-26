@@ -1,6 +1,6 @@
 Summary: WebTop5
 Name: webtop5
-Version: 1.2.12
+Version: 1.2.13
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -54,6 +54,10 @@ rm -rf %{buildroot}
 %doc VERSION
 
 %changelog
+* Tue Mar 26 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.13-1
+- WebTop: no icon on mail attachments - Bug NethServer/dev#5731
+- WebTop 5.6.3 - NethServer/dev#5729
+
 * Wed Feb 20 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.12-1
 - WebTop 5.5.3 - NethServer/dev#5712
   - Update to upstream release 5.5.3
