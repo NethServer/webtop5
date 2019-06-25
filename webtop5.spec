@@ -1,6 +1,6 @@
 Summary: WebTop5
 Name: webtop5
-Version: 1.2.15
+Version: 1.3.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 %doc VERSION
 
 %changelog
+* Tue Jun 25 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.3.0-1
+- WebTop 5.7.1 - NethServer/dev#5770
+  - Update to upstream release 5.7.1
+  - Revert "rpm spec: restart tomcat after upgrade"
+
 * Tue May 28 2019 Matteo Valentini <matteo.valentini@nethesis.it> - 1.2.15-1
 - WebTop 5.6.5 - NethServer/dev#5768
 
