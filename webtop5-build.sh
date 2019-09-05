@@ -34,7 +34,20 @@ function exit_error
     exit 1
 }
 
-for P in mvn javac; do
+# Make sure nodjs is in path
+PATH=$PATH:$(pwd)/node-v0.8.9-linux-x64/bin
+export PATH
+
+# Maven sure maven has enough RAM
+MAVEN_OPTS="-Xmx1024m"
+export MAVEN_OPTS
+
+if [ ! -d "node-v0.8.9-linux-x64" ]; then
+    wget https://nodejs.org/dist/v0.8.9/node-v0.8.9-linux-x64.tar.gz
+    tar xvzf node-v0.8.9-linux-x64.tar.gz
+fi
+
+for P in mvn javac bzip2 node wget; do
     which $P >/dev/null 2>&1 || { echo "Missing '$P' executable!"; exit 1; }
 done
 
