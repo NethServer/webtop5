@@ -55,10 +55,13 @@ if [ ! -f VERSION ]; then
    exit_error
 fi
 
-tag_name=$(cat VERSION)
-
-if [ -z $tag_name ]; then
-    exit_error
+if [ "$1" == "staging" ]; then
+    tag_name=''
+else
+    tag_name=$(cat VERSION)
+    if [ -z $tag_name ]; then
+        exit_error
+    fi
 fi
 
 if [ ! -d sonicle-webtop5-gate ]; then
@@ -129,6 +132,14 @@ echo "Copying files..."
 echo
 cp -v sonicle-webtop5-gate/components/webtop-webapp/target/webtop-webapp-5.war .
 cp -v sonicle-webtop5-gate/sql-scripts.tar.gz .
+
+if [ "$1" == "staging" ]; then
+    echo "Replacing war from staging..."
+    staging_release=$(curl -s https://www.sonicle.com/nethesis/webtop5/staging/ | grep -Eo '(webtop5%23%23[0-9]+\.war)')
+    wget https://www.sonicle.com/nethesis/webtop5/staging/$staging_release -O webtop-webapp-5.war
+    echo "STAGING-$staging_release" > VERSION
+fi
+
 echo
 echo "webtop-webapp-5.war and sql-scripts.tar.gz successfully created"
 echo
