@@ -5,7 +5,7 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
-# Source1 and Source2 can be downloaded executing: webtop5-build.sh
+# Source1 and Source2 can be created executing the 'prep-sources' script
 Source1: webtop-webapp-5.war
 Source2: sql-scripts.tar.gz
 Source4: VERSION

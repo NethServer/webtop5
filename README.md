@@ -28,9 +28,9 @@ yum install maven java-1.8.0-openjdk-devel bzip2
 
 Please, see istruction here: https://github.com/sonicle/sonicle-webtop5-gate
 
-#### webtop5-build.sh
+#### prep-sources
 
-You can use also use ``webtop5-build.sh`` automation script.
+You can use also use ``prep-sources`` automation script.
 
 Before starting the script, make sure to select the correct release by adding it to `VERSION` file:
 ```
