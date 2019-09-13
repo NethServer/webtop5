@@ -103,6 +103,18 @@ if [ -n $tag_name ]; then
     popd
 fi
 
+popd
+echo
+echo "Adding Nethesis patches..."
+echo
+for f in $(find patches -name \*.patch); do
+    project=$(echo $f | cut -d'/' -f 2)
+    git apply $f --directory=sonicle-webtop5-gate/components/$project
+    echo "Applying $f"
+done
+pushd sonicle-webtop5-gate
+
+
 echo
 echo "Building..."
 echo
