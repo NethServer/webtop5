@@ -1,0 +1,62 @@
+#!/bin/bash
+
+#
+# Build a single WebTop component and generate WAR file
+#
+# This script assumes that `gmake clone` and `gmake build` have
+# already been executed in `sonicle-webtop5-gate` project
+#
+
+MVN="/usr/bin/mvn -q"
+
+declare -A build_profiles=()
+build_profiles[webtop-core-db]=build-reports,profile-production
+build_profiles[webtop-core-db]=build-reports,profile-production
+build_profiles[webtop-core]=build-reports,profile-production
+build_profiles[webtop-core-api]=build-reports,profile-production
+build_profiles[webtop-calendar]=build-reports,profile-production
+build_profiles[webtop-calendar-api]=build-reports,profile-production
+build_profiles[webtop-contacts]=build-reports,profile-production
+build_profiles[webtop-contacts-api]=build-reports,profile-production
+build_profiles[webtop-mail]=build-reports,profile-production
+build_profiles[webtop-mail-api]=build-reports,profile-production
+build_profiles[webtop-tasks]=build-reports,profile-production
+build_profiles[webtop-tasks-api]=build-reports,profile-production
+build_profiles[webtop-vfs]=build-reports,profile-production
+build_profiles[webtop-vfs-api]=build-reports,profile-production
+build_profiles[webtop-mattermost]=build-reports,profile-production
+build_profiles[sonicle-extjs-extensions]=profile-production
+build_profiles[webtop-webapp]=profile-production
+
+if [ "$#" -ne 2 ]; then
+    echo "Build a single WebTop component and generate WAR file"
+    echo 
+    echo "Usage: $0 <DEV_COMPONENT_PATH> <SONICLE_WEBTOP5_GATE_PATH>"
+    echo 
+    echo "Example:"
+    echo "   $0 ~/projects/webtop-mail ~/projects/sonicle-webtop5-gate"
+    exit
+fi
+
+DEV_COMPONENT_PATH=$1
+SONICLE_WEBTOP5_GATE_PATH=$2
+COMPONENT=${DEV_COMPONENT_PATH##*/}
+
+echo "Removing $SONICLE_WEBTOP5_GATE_PATH/components/$COMPONENT"
+rm -rf $SONICLE_WEBTOP5_GATE_PATH/components/$COMPONENT
+
+echo "Copying $DEV_COMPONENT_PATH to $SONICLE_WEBTOP5_GATE_PATH/components/"
+cp -r $DEV_COMPONENT_PATH $SONICLE_WEBTOP5_GATE_PATH/components/
+
+CMD="$MVN clean install"
+BUILD_PROFILE=${build_profiles[$COMPONENT]}
+if [ ! -z "$BUILD_PROFILE" ]; then
+    BUILD_PROFILE="-P $BUILD_PROFILE"
+fi
+
+cd $SONICLE_WEBTOP5_GATE_PATH/components/$COMPONENT && echo "$COMPONENT : $CMD $BUILD_PROFILE" && $CMD $BUILD_PROFILE
+
+cd $SONICLE_WEBTOP5_GATE_PATH
+gmake deploy
+
+echo "Done"
