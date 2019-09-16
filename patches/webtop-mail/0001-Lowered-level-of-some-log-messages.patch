@@ -1,16 +1,16 @@
-From 98c6ad0bf7728d2d8e520093e948c4811e5b00c5 Mon Sep 17 00:00:00 2001
+From 2d467baf7df0ceb6bae6d3010e8a807a30452b3c Mon Sep 17 00:00:00 2001
 From: Andrea Leardini <andrea.leardini@nethesis.it>
-Date: Fri, 13 Sep 2019 10:38:49 +0200
+Date: Mon, 16 Sep 2019 10:32:48 +0200
 Subject: [PATCH] Lowered level of some log messages
 
 Some log messages that concern email drafts are now printed to log at
 debug level instead of error level
 ---
- src/main/java/com/sonicle/webtop/mail/Service.java | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ .../java/com/sonicle/webtop/mail/Service.java  | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/src/main/java/com/sonicle/webtop/mail/Service.java b/src/main/java/com/sonicle/webtop/mail/Service.java
-index 0bfe4aa..3e61477 100644
+index f08f36c..4f2c1cd 100644
 --- a/src/main/java/com/sonicle/webtop/mail/Service.java
 +++ b/src/main/java/com/sonicle/webtop/mail/Service.java
 @@ -681,17 +681,17 @@ public class Service extends BaseService {
@@ -44,6 +44,24 @@ index 0bfe4aa..3e61477 100644
  		}
  	}	
  	
+@@ -993,7 +993,7 @@ public class Service extends BaseService {
+ 			msg = createMessage(from, smsg, attachments, false);
+ 			Transport.send(msg);
+ 		} catch (Exception ex) {
+-			Service.logger.error("Exception",ex);
++			Service.logger.debug("Exception",ex);
+ 			retexc = ex;
+ 		}
+ 
+@@ -4705,7 +4705,7 @@ public class Service extends BaseService {
+                 json=new JsonResult(false, msgstr);
+ 			}
+ 		} catch (Exception exc) {
+-			Service.logger.error("Exception",exc);
++			Service.logger.debug("Exception",exc);
+ 			Throwable cause = exc.getCause();
+ 			String msg = cause != null ? cause.getMessage() : exc.getMessage();
+             json=new JsonResult(false, msg);
 @@ -4813,7 +4813,7 @@ public class Service extends BaseService {
                  json=new JsonResult(false, exc.getMessage());
  			}
