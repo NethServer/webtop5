@@ -30,7 +30,7 @@ Please, see istruction here: https://github.com/sonicle/sonicle-webtop5-gate
 
 #### prep-sources
 
-You can use also use ``prep-sources`` automation script.
+You can use also use ``prep-sources`` automation script inside the ``scripts`` directory.
 
 Before starting the script, make sure to select the correct release by adding it to `VERSION` file:
 ```

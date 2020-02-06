@@ -1,40 +1,45 @@
 Summary: WebTop5
 Name: webtop5
-Version: 1.4.2
+Version: 5.8.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
-Source0: %{name}-%{version}.tar.gz
-# Source1 and Source2 can be created executing the 'prep-sources' script
-Source1: webtop-webapp-5.war
-Source2: sql-scripts.tar.gz
-Source4: VERSION
+Source0: https://www.sonicle.com/nethesis/webtop5/release/wt5-%{version}.zip
+Source1: https://raw.githubusercontent.com/sonicle-webtop/webtop-core/master/src/main/resources/com/sonicle/webtop/core/meta/db/init-config.sql
+Source2: https://raw.githubusercontent.com/sonicle-webtop/webtop-core/master/src/main/resources/com/sonicle/webtop/core/meta/db/init-core.sql
+Source3: https://raw.githubusercontent.com/sonicle-webtop/webtop-calendar/master/src/main/resources/com/sonicle/webtop/calendar/meta/db/init-calendar.sql
+Source4: https://raw.githubusercontent.com/sonicle-webtop/webtop-contacts/master/src/main/resources/com/sonicle/webtop/contacts/meta/db/init-contacts.sql
+Source5: https://raw.githubusercontent.com/sonicle-webtop/webtop-mail/master/src/main/resources/com/sonicle/webtop/mail/meta/db/init-mail.sql
+Source6: https://raw.githubusercontent.com/sonicle-webtop/webtop-tasks/master/src/main/resources/com/sonicle/webtop/tasks/meta/db/init-tasks.sql
+Source7: https://raw.githubusercontent.com/sonicle-webtop/webtop-vfs/master/src/main/resources/com/sonicle/webtop/vfs/meta/db/init-vfs.sql
+Source8: https://raw.githubusercontent.com/sonicle-webtop/webtop-core/master/src/main/resources/com/sonicle/webtop/core/meta/db/init-data-core.sql
+Source9: https://raw.githubusercontent.com/sonicle-webtop/webtop-mail/master/src/main/resources/com/sonicle/webtop/mail/meta/db/init-data-mail.sql
+
+Patch0: password_length.patch
+
 BuildArch: noarch
+BuildRequires: unzip
+
 Provides: webtop5-core, webtop5-libs
 Obsoletes: webtop5-core, webtop5-libs
 Conflicts: webtop4-core
-Patch0: password_length.patch
 
-# Do not repack JARs to avoid file date
-# Should be safe: https://www.redhat.com/archives/fedora-devel-java-list/2008-September/msg00042.html
-%define __jar_repack %{nil}
-
-BuildRequires: unzip
 
 %description
 WebTop 5 RPM, see http://sonicle-webtop.sourceforge.net/
 
 %prep
-%setup
+unzip %{SOURCE0}
 
 %build
-mkdir -p root/var/lib/tomcats/webtop/webapps/webtop
-mkdir -p root/usr/share/webtop/sql
-tar xvzf %{SOURCE2} -C root/usr/share/webtop/sql
+mkdir -p root/var/lib/tomcats/webtop/webapps/
+mkdir -p root/usr/share/webtop/sql/{data,schema}
+cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} root/usr/share/webtop/sql/schema
+# Remove invalid lines starting with @ used inside WebTop
+find root/usr/share/webtop/sql/schema -name init-\*.sql | xargs sed -i '/^@/d'
+cp %{SOURCE8} %{SOURCE9} root/usr/share/webtop/sql/data
 patch -d root/usr/share/webtop/sql/schema -p0 < %{PATCH0}
-unzip %{SOURCE1} -d root/var/lib/tomcats/webtop/webapps/webtop
-mv root/var/lib/tomcats/webtop/webapps/webtop/META-INF/data-sources.xml root/var/lib/tomcats/webtop/webapps/webtop/META-INF/data-sources.xml.example
-mv root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml.example
+mv webtop*war root/var/lib/tomcats/webtop/webapps/
 
 %install
 rm -rf %{buildroot}
@@ -43,10 +48,8 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/var/lib/tomcats/webtop/webapps/webtop/*
+/var/lib/tomcats/webtop/webapps/*.war
 /usr/share/webtop/sql/*
-%doc COPYING
-%doc VERSION
 
 %changelog
 * Tue Dec 03 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.2-1
