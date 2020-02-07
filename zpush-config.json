@@ -1,0 +1,13 @@
+{
+  "timezone": "Etc/UTC",
+  "log": {
+    "level": "DEBUG",
+    "dir": "/var/log/z-push/"
+  },
+  "webtop": {
+    "apiBaseUrl": "http://localhost:58080/webtop"
+  },
+  "state": {
+      "dir": "/var/log/z-push/state"
+   }
+}

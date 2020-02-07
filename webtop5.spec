@@ -19,6 +19,10 @@ Source10: webdav-config.json
 Source11: webtop-dav.logrotate
 Source12: webtop5-webdav.conf
 
+Source13: zpush-config.json
+Source14: webtop-zpush.logrotate
+Source15: webtop5-zpush.conf
+
 Patch0: password_length.patch
 
 BuildArch: noarch
@@ -30,6 +34,11 @@ Conflicts: webtop4-core
 
 Provides: webtop5-webdav
 Obsoletes: webtop5-webdav
+
+Provides: webtop5-zpush
+Obsoletes: webtop5-zpush
+
+Requires: rh-php72-php-fpm, rh-php72-php-mbstring, rh-php72-php-imap, rh-php72-php-pdo
 
 %description
 WebTop 5 RPM, see http://sonicle-webtop.sourceforge.net/
@@ -49,15 +58,25 @@ patch -d root/usr/share/webtop/sql/schema -p0 < %{PATCH0}
 version=$(ls webtop5*.war  | cut -d'#' -f 3 | tr -dc '0-9')
 mv webtop*war "root/var/lib/tomcats/webtop/webapps/webtop##"$version.war
 
-# webdav
-mkdir -p root/etc/httpd/conf.d/
-mkdir -p root/var/log/webtop-dav/
+# webdav zpush common
 mkdir -p root/etc/logrotate.d/
+mkdir -p root/etc/httpd/conf.d/
+
+# webdav
+mkdir -p root/var/log/webtop-dav/
 mkdir -p root/usr/share/webtop/webdav/
 tar xvzf webtop-dav-server-*.tgz -C root/usr/share/webtop/webdav/
 cp %{SOURCE10} root/usr/share/webtop/webdav/config.json
 cp %{SOURCE11} root/etc/logrotate.d/webtop-dav
 cp %{SOURCE12} root/etc/httpd/conf.d/
+
+# zpush
+mkdir -p root/var/log/z-push/state
+mkdir -p root/usr/share/webtop/z-push/
+tar xvzf webtop-eas-server-*.tgz -C root/usr/share/webtop/z-push
+cp %{SOURCE13} root/usr/share/webtop/z-push/config.json
+cp %{SOURCE14} root/etc/logrotate.d/webtop-zpush
+cp %{SOURCE15} root/etc/httpd/conf.d/
 
 
 %install
@@ -76,6 +95,15 @@ rm -rf %{buildroot}
 /etc/logrotate.d/webtop-dav
 /usr/share/webtop/webdav/.htaccess
 /usr/share/webtop/webdav/*
+
+%attr(755, apache, apache) /var/log/z-push
+%attr(755, apache, apache) /var/log/z-push/state
+%attr(755, root, root) /usr/share/webtop/z-push/z-push-admin.php
+%config /etc/httpd/conf.d/webtop5-zpush.conf
+%config /usr/share/webtop/z-push/config.json
+/usr/share/webtop/z-push/*
+/usr/share/webtop/z-push/.htaccess
+/etc/logrotate.d/webtop-zpush
 
 
 %changelog
