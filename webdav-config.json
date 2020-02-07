@@ -1,0 +1,26 @@
+{
+	"debug": false,
+	"caldav": true,
+	"carddav": true,
+	"timezone": "UTC",
+	"baseUri": "/webtop-dav/server.php",
+	"log": {
+		"level": "NOTICE",
+		"file": "/var/log/webtop-dav/dav-server.log"
+	},
+	"api": {
+		"baseUrl": "http://localhost:58080/webtop",
+		"dav": {
+			"url": "/api/com.sonicle.webtop.core/v1",
+			"baseUrl": null
+		},
+		"caldav": {
+			"url": "/api/com.sonicle.webtop.calendar/v1",
+			"baseUrl": null
+		},
+		"carddav": {
+			"url": "/api/com.sonicle.webtop.contacts/v1",
+			"baseUrl": null
+		}
+	}
+}

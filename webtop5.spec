@@ -15,6 +15,10 @@ Source7: https://raw.githubusercontent.com/sonicle-webtop/webtop-vfs/master/src/
 Source8: https://raw.githubusercontent.com/sonicle-webtop/webtop-core/master/src/main/resources/com/sonicle/webtop/core/meta/db/init-data-core.sql
 Source9: https://raw.githubusercontent.com/sonicle-webtop/webtop-mail/master/src/main/resources/com/sonicle/webtop/mail/meta/db/init-data-mail.sql
 
+Source10: webdav-config.json
+Source11: webtop-dav.logrotate
+Source12: webtop5-webdav.conf
+
 Patch0: password_length.patch
 
 BuildArch: noarch
@@ -24,6 +28,8 @@ Provides: webtop5-core, webtop5-libs
 Obsoletes: webtop5-core, webtop5-libs
 Conflicts: webtop4-core
 
+Provides: webtop5-webdav
+Obsoletes: webtop5-webdav
 
 %description
 WebTop 5 RPM, see http://sonicle-webtop.sourceforge.net/
@@ -43,6 +49,17 @@ patch -d root/usr/share/webtop/sql/schema -p0 < %{PATCH0}
 version=$(ls webtop5*.war  | cut -d'#' -f 3 | tr -dc '0-9')
 mv webtop*war "root/var/lib/tomcats/webtop/webapps/webtop##"$version.war
 
+# webdav
+mkdir -p root/etc/httpd/conf.d/
+mkdir -p root/var/log/webtop-dav/
+mkdir -p root/etc/logrotate.d/
+mkdir -p root/usr/share/webtop/webdav/
+tar xvzf webtop-dav-server-*.tgz -C root/usr/share/webtop/webdav/
+cp %{SOURCE10} root/usr/share/webtop/webdav/config.json
+cp %{SOURCE11} root/etc/logrotate.d/webtop-dav
+cp %{SOURCE12} root/etc/httpd/conf.d/
+
+
 %install
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
@@ -52,6 +69,14 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /var/lib/tomcats/webtop/webapps/*.war
 /usr/share/webtop/sql/*
+
+%config /etc/httpd/conf.d/webtop5-webdav.conf
+%config /usr/share/webtop/webdav/config.json
+%dir %attr(-,apache,apache) /var/log/webtop-dav
+/etc/logrotate.d/webtop-dav
+/usr/share/webtop/webdav/.htaccess
+/usr/share/webtop/webdav/*
+
 
 %changelog
 * Tue Dec 03 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.2-1

@@ -1,0 +1,5 @@
+/var/log/webtop-dav/*.log {
+    copytruncate
+    missingok
+    create 0644 apache apache
+}
