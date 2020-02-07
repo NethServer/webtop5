@@ -39,7 +39,9 @@ cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} %{SOURCE7} 
 find root/usr/share/webtop/sql/schema -name init-\*.sql | xargs sed -i '/^@/d'
 cp %{SOURCE8} %{SOURCE9} root/usr/share/webtop/sql/data
 patch -d root/usr/share/webtop/sql/schema -p0 < %{PATCH0}
-mv webtop*war root/var/lib/tomcats/webtop/webapps/
+# Rename the war
+version=$(ls webtop5*.war  | cut -d'#' -f 3 | tr -dc '0-9')
+mv webtop*war "root/var/lib/tomcats/webtop/webapps/webtop##"$version.war
 
 %install
 rm -rf %{buildroot}
