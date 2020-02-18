@@ -34,7 +34,6 @@ tar xvzf %{SOURCE2} -C root/usr/share/webtop/sql
 patch -d root/usr/share/webtop/sql/schema -p0 < %{PATCH0}
 unzip %{SOURCE1} -d root/var/lib/tomcats/webtop/webapps/webtop
 mv root/var/lib/tomcats/webtop/webapps/webtop/META-INF/data-sources.xml root/var/lib/tomcats/webtop/webapps/webtop/META-INF/data-sources.xml.example
-mv root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml root/var/lib/tomcats/webtop/webapps/webtop/WEB-INF/classes/logback.xml.example
 
 %install
 rm -rf %{buildroot}
