@@ -55,7 +55,7 @@ if [ ! -f VERSION ]; then
    exit_error
 fi
 
-if [ "$1" == "staging" ]; then
+if cat VERSION | grep -qE ^staging- ; then
     tag_name=''
 else
     tag_name=$(cat VERSION)
