@@ -1,0 +1,26 @@
+name: Build Staging RPM
+on:
+  workflow_dispatch:
+    inputs:
+      war:
+        description: 'WAR number'
+        required: true
+
+jobs:
+  update_create_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get current stable version
+      id: get_version
+      run: echo "::set-output name=version::$(cat VERSION)"
+    - name: Set staging version
+      run: echo "staging-${{ github.event.inputs.war }}" > VERSION
+    - name: Create/Update pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        branch: ${{ steps.get_version.outputs.version }}-next
+        title: Update to upstream release ${{ steps.get_version.outputs.version }}-next
+        body: ''
+        commit-message: Update staging war ${{ github.event.inputs.war }}
+        draft: true
