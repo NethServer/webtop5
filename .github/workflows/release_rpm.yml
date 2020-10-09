@@ -1,0 +1,29 @@
+name: Build Release RPM
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'WebTop Version'
+        required: true
+      issue:
+        description: 'NethServer/dev issue number'
+        default: ''
+
+jobs:
+  update_create_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get current stable version
+      id: get_version
+      run: echo "::set-output name=version::$(cat VERSION)"
+    - name: Set new version
+      run: echo "wt-${{ github.event.inputs.version }}" > VERSION
+    - name: Create/Update pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        branch: ${{ steps.get_version.outputs.version }}-next
+        title: Update to upstream release wt-${{ github.event.inputs.version }}
+        body: NethServer/dev#${{ github.event.inputs.issue }}
+        commit-message: Update to upstream release wt-${{ github.event.inputs.version }}
+        draft: false
