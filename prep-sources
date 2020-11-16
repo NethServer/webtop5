@@ -93,17 +93,16 @@ fi
 
 pushd components
 
-for d in $(find . -maxdepth 1  -type d)
+for repo_path in $(find . -maxdepth 1  -type d)
 do
-    repo_path="$d/.git"
-    repo_name=$(basename $d)
+    repo_name=$(basename $repo_path)
     if [ -d $repo_path ]; then
-       if [  -z $tag_name ] && git --git-dir=$repo_path branch -r | grep -q origin/release; then
+       if [  -z $tag_name ] && git -C $repo_path branch -r | grep -q origin/release; then
 	   echo "Checking out 'release' branch for '$repo_name'"
-           git --git-dir=$repo_path checkout origin/release --force > /dev/null
-       elif git --git-dir=$repo_path tag | grep -q $tag_name; then
+           git -C $repo_path checkout origin/release --force > /dev/null
+       elif git -C $repo_path tag | grep -q $tag_name; then
            echo "Checking out tag '$tag_name' for '$repo_name'"
-           git --git-dir=$repo_path checkout tags/$tag_name --force > /dev/null
+           git -C $repo_path checkout tags/$tag_name --force > /dev/null
        else
            echo "Checking out 'master' for '$repo_name'"
        fi
