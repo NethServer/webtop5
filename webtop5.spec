@@ -1,6 +1,6 @@
 Summary: WebTop5
 Name: webtop5
-Version: 1.4.11
+Version: 1.4.12
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -48,6 +48,10 @@ rm -rf %{buildroot}
 %doc VERSION
 
 %changelog
+* Fri Jan 29 2021 Matteo Valentini <matteo.valentini@nethesis.it> - 1.4.12-1
+- Webtop 5.10.1 - NethServer/dev#6402
+  - Update to upstream release wt-5.10.1
+
 * Thu Jan 14 2021 Matteo Valentini <matteo.valentini@nethesis.it> - 1.4.11-1
 - Webtop 5.10.0 - NethServer/dev#6368
   - Update to upstream release wt-5.10.0
