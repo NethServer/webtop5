@@ -28,7 +28,7 @@ env:
         "
 
 before_install:
-    - sudo apt-get install -y maven
+    - sudo ln -s $(which mvn) /usr/bin/mvn
     - sudo ln -s /usr/bin/make /usr/bin/gmake
     - cp settings.xml ~/.m2/
 
