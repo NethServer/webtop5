@@ -2,18 +2,18 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                           https://maven.apache.org/xsd/settings-1.0.0.xsd">
-        <servers>
-                <server>
-                        <id>sonicle-maven-mirror</id>
-                        <username>nethesis</username>
-                        <password>nethesis</password>
-                </server>
-        </servers>
         <mirrors>
-                <mirror>
-                        <id>sonicle-maven-mirror</id>
-                        <url>https://mvn.sonicle.com/repository/maven-mirror/</url>
-                        <mirrorOf>central,52north-releases,jahia-repository</mirrorOf>
-                </mirror>
-        </mirrors>
+		<!-- Fixes new Jaspersoft repo changes for https://github.com/alexnederlof/Jasper-report-maven-plugin -->
+		<!-- This will override default repositories defined in plugin's POM -->
+		<mirror>
+			<id>jasperreports-mirror</id>
+			<url>https://jaspersoft.jfrog.io/artifactory/jr-ce-releases/</url>
+			<mirrorOf>jasperreports</mirrorOf>
+		</mirror>
+		<mirror>
+			<id>jaspersoft-third-party-mirror</id>
+			<url>https://jaspersoft.jfrog.io/artifactory/third-party-ce-artifacts/</url>
+			<mirrorOf>jaspersoft-third-party</mirrorOf>
+		</mirror>
+	</mirrors>
 </settings>

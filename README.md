@@ -28,6 +28,12 @@ yum install maven java-1.8.0-openjdk-devel bzip2
 
 Please, see istruction here: https://github.com/sonicle/sonicle-webtop5-gate
 
+### Fix jasper mirrors
+
+The official repository of some jasper components used in the build process has some issues, to fix it you can
+copy the [settings.xml](settings.xml) file into the `~/.m2/` directory or add the mirrors into your pre-existing
+configuration.
+
 #### prep-sources
 
 You can use also use ``prep-sources`` automation script.
