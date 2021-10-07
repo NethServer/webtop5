@@ -28,6 +28,8 @@ env:
         "
 
 before_install:
+    - sudo apt-get update
+    - sudo apt-get install libgnutls30 -y
     - sudo ln -s $(which mvn) /usr/bin/mvn
     - sudo ln -s /usr/bin/make /usr/bin/gmake
     - cp settings.xml ~/.m2/
