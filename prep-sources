@@ -136,6 +136,7 @@ gmake deploy
 echo
 echo "Extracting sql scripts..."
 tmpdir=$(mktemp -d)
+cp -rp postgres $tmpdir
 mkdir $tmpdir/{data,schema}
 find -path "*/resources/*" -name init-data\*.sql -type f  -exec cp -p '{}' $tmpdir/data \;
 find -path "*/resources/*" -name init-\*.sql ! -name init-data\*.sql -type f -exec cp -p '{}' $tmpdir/schema \;
