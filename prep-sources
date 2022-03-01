@@ -55,52 +55,33 @@ for P in mvn javac bzip2 node wget; do
     which $P >/dev/null 2>&1 || { echo "Missing '$P' executable!"; exit 1; }
 done
 
-
-if [ ! -d sonicle-webtop5-gate ]; then
-    echo "Downloading sonicle-webtop5-gate..."
+if [ ! -d webtop-gate ]; then
+    echo "Downloading webtop-gate..."
     echo
-    git clone https://github.com/sonicle/sonicle-webtop5-gate.git
+    GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/sonicle-webtop/webtop-gate.git
 fi
 
-pushd sonicle-webtop5-gate
+pushd webtop-gate
 git pull
 
 echo
 echo "Cleanup local copy... "
-rm -rf sencha components
+rm -rf components sencha-620  sencha-750  target-servers  target-wars
 
 echo
 echo "Cloning all repositories..."
 echo
 
 if [ -z $tag_name ]; then
-  gmake \
-    COMPONENTS_GIT_BASE_URL=https://code.sonicle.com/scm/webtop \
-    TOOLS_GIT_BASE_URL=https://code.sonicle.com/scm/mvn \
-    clone >/dev/null
+  make setup \
+    USE_LFS=0 \
+    DEFAULT_CLONE_BASEURL=https://code.sonicle.com/scm/webtop \
+    DEFAULT_MVNTOOLS_CLONE_BASEURL=https://code.sonicle.com/scm/mvn \
+    DEFAULT_BASE_BRANCH=release
 else
-  gmake clone >/dev/null
+  make setup USE_LFS=0
+  make checkout-tag TAG=$tag_name
 fi
-
-pushd components
-
-for repo_path in $(find . -maxdepth 1  -type d)
-do
-    repo_name=$(basename $repo_path)
-    if [ -d $repo_path ]; then
-       if [  -z $tag_name ] && git -C $repo_path branch -r | grep -q origin/release; then
-	   echo "Checking out 'release' branch for '$repo_name'"
-           git -C $repo_path checkout origin/release --force > /dev/null
-       elif git -C $repo_path tag | grep -q $tag_name; then
-           echo "Checking out tag '$tag_name' for '$repo_name'"
-           git -C $repo_path checkout tags/$tag_name --force > /dev/null
-       else
-           echo "Checking out 'master' for '$repo_name'"
-       fi
-    fi
-done
-
-popd
 
 popd
 echo
@@ -108,21 +89,16 @@ echo "Adding Nethesis patches..."
 echo
 for f in $(find patches -name \*.patch); do
     project=$(echo $f | cut -d'/' -f 2)
-    git apply $f --directory=sonicle-webtop5-gate/components/$project
+    git apply $f --directory=webtop-gate/components/$project
     echo "Applying $f"
 done
-pushd sonicle-webtop5-gate
+pushd webtop-gate
 
 
 echo
 echo "Building..."
 echo
-gmake build
-
-echo
-echo "Creating war..."
-echo
-gmake deploy
+make build
 
 echo
 echo "Extracting sql scripts..."
@@ -142,8 +118,8 @@ popd
 echo
 echo "Copying files..."
 echo
-cp -v sonicle-webtop5-gate/components/webtop-webapp/target/webtop-webapp-5.war .
-cp -v sonicle-webtop5-gate/sql-scripts.tar.gz .
+cp -v webtop-gate/target-wars/webtop-webapp-*_default.war webtop-webapp-5.war
+cp -v webtop-gate/sql-scripts.tar.gz .
 
 echo
 echo "webtop-webapp-5.war and sql-scripts.tar.gz successfully created"
