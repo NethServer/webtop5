@@ -1,6 +1,6 @@
 Summary: WebTop5
 Name: webtop5
-Version: 1.4.26
+Version: 1.5.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -48,6 +48,11 @@ rm -rf %{buildroot}
 %doc VERSION
 
 %changelog
+* Mon Mar 21 2022 Matteo Valentini <matteo.valentini@nethesis.it> - 1.5.0-1
+- WebTop 5.16.1 - NethServer/dev#6640
+  - Update to upstream release wt-5.16.1
+  - prep-sources: use new Sonicle's build system
+
 * Thu Nov 25 2021 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.26-1
 - WebTop 5.14.2 - NethServer/dev#6604
 
