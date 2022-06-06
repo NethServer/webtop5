@@ -1,0 +1,27 @@
+name: Build Development RPM
+on:
+  workflow_dispatch:
+
+jobs:
+  update_create_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get current stable version
+      id: get_version
+      run: echo "::set-output name=version::$(cat VERSION)"
+    - name: Get current stable version
+      id: get_date
+      run: |
+        export TZ=Europe/Rome
+        echo "::set-output name=current::$(date)"
+    - name: Set development version
+      run: echo "development-${{ steps.get_date.outputs.current }}" > VERSION
+    - name: Create/Update pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        branch: ${{ steps.get_version.outputs.version }}-next
+        title: Update to upstream release ${{ steps.get_version.outputs.version }}-next
+        body: ''
+        commit-message: Update development war ${{ steps.get_date.outputs.current }}
+        draft: true
