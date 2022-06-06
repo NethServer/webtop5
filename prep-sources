@@ -38,8 +38,10 @@ if [ ! -f VERSION ]; then
    exit_error
 fi
 
-if cat VERSION | grep -qE ^staging- ; then
-    tag_name=''
+if cat VERSION | grep -qE ^development- ; then
+    base_branch="develop"
+elif cat VERSION | grep -qE ^staging- ; then
+    base_branch="release"
 else
     tag_name=$(cat VERSION)
     if [ -z $tag_name ]; then
@@ -72,12 +74,12 @@ echo
 echo "Cloning all repositories..."
 echo
 
-if [ -z $tag_name ]; then
+if [ "$base_branch" == "release" -o  "$base_branch" == "develop" ]; then
   make setup \
     USE_LFS=0 \
     DEFAULT_CLONE_BASEURL=https://code.sonicle.com/scm/webtop \
     DEFAULT_MVNTOOLS_CLONE_BASEURL=https://code.sonicle.com/scm/mvn \
-    DEFAULT_BASE_BRANCH=release
+    DEFAULT_BASE_BRANCH=$base_branch
 else
   make setup USE_LFS=0
   make checkout-tag TAG=$tag_name
