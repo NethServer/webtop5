@@ -15,5 +15,16 @@
 			<url>https://jaspersoft.jfrog.io/artifactory/third-party-ce-artifacts/</url>
 			<mirrorOf>jaspersoft-third-party</mirrorOf>
 		</mirror>
+		<!-- Fixes Maven changes for preventing MITM attacks: http://maven.apache.org/docs/3.8.1/release-notes.html#cve-2021-26291 -->
+		<mirror>
+			<id>jahia-repository2</id>
+			<url>https://maven.jahia.org/maven2/</url>
+			<mirrorOf>jahia-repository</mirrorOf>
+		</mirror>
+		<mirror>
+			<id>52north-releases2</id>
+			<url>https://52north.org/maven/repo/releases/</url>
+			<mirrorOf>52north-releases</mirrorOf>
+		</mirror>
 	</mirrors>
 </settings>
