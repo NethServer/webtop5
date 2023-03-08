@@ -77,8 +77,8 @@ echo
 if [ "$base_branch" == "release" -o  "$base_branch" == "develop" ]; then
   make setup \
     USE_LFS=0 \
-    DEFAULT_CLONE_BASEURL=https://code.sonicle.com/scm/webtop \
-    DEFAULT_MVNTOOLS_CLONE_BASEURL=https://code.sonicle.com/scm/mvn \
+    DEFAULT_CLONE_BASEURL=https://bitbucket.org/sonicle \
+    DEFAULT_MVNTOOLS_CLONE_BASEURL=https://bitbucket.org/sonicle \
     DEFAULT_BASE_BRANCH=$base_branch
 else
   make setup USE_LFS=0
