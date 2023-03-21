@@ -24,3 +24,4 @@ jobs:
         body: ''
         commit-message: Update staging war ${{ github.event.inputs.war }}
         draft: true
+        token: ${{ secrets.webtop_pr }}

@@ -27,3 +27,4 @@ jobs:
         body: NethServer/dev#${{ github.event.inputs.issue }}
         commit-message: Update to upstream release wt-${{ github.event.inputs.version }}
         draft: false
+        token: ${{ secrets.webtop_pr }}

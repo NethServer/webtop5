@@ -25,3 +25,4 @@ jobs:
         body: ''
         commit-message: Update development war ${{ steps.get_date.outputs.current }}
         draft: true
+        token: ${{ secrets.webtop_pr }}
